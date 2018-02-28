@@ -4,8 +4,8 @@
 var width = 500;
 var height = 960;
 
-var highColor = '#08519c'
-var lowColor = '#c6dbef'
+var highColor = '#2c7fb8'
+var lowColor = '#edf8b1'
 
 // D3 Projection
 var projection = d3.geoAlbersUsa()
@@ -21,6 +21,11 @@ var svg = d3.select('#visContainer')
     .append('svg')
     .attr('height', width) //can adjust size as desired
     .attr('width', height);
+
+var div = d3.select("#visContainer")
+	.append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
 
 //the main visualization function that enables loading
 //different data column of the data set
@@ -76,10 +81,18 @@ function choosedata(datacol) {
                 .style("stroke-width", "1")
                 .style("fill", function(d) { return ramp(d.properties.value) })
                 .on("mouseover", function(d) {
-                    tooltip.text(d.properties.name + ": " + Math.round(d.properties.value*100) + "% of total users");
-                    return tooltip.style("visibility", "visible");
+                    div.transition()        
+      	                .duration(200)      
+                        .style("opacity", .9);      
+                    div.text(d.properties.name + ": " + Math.round(d.properties.value*100) + "% of total users")
+                        .style("left", (d3.event.pageX) + "px")     
+                        .style("top", (d3.event.pageY - 28) + "px");
                 })
-                .on("mouseout", function() { return tooltip.style("visibility", "hidden"); });
+                .on("mouseout", function() { 
+                    div.transition()        
+                        .duration(500)      
+                        .style("opacity", 0);  
+                });
 
 
             // add a legend
@@ -116,14 +129,14 @@ function choosedata(datacol) {
 
             //draw a bar to show color and corresponding data
             key.append("rect")
-                .attr("width", w - 100)
-                .attr("height", h)
+                .attr("width", w - 110)
+                .attr("height", h-5)
                 .style("fill", "url(#gradient)")
                 .attr("transform", "translate(0,10)");
 
             //Create a linear scale for the y values. 
             var y = d3.scaleLinear()
-                .range([h, 0])
+                .range([h, 10])
                 .domain([minVal, maxVal]);
 
             //Define a right axis for the y-scale
