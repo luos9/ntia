@@ -9,15 +9,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--styling of legend-->
     <style>
-        @import "bourbon";
-
-        @font-face {
-            font-family: 'FontAwesome';
-            src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/85568/fontawesome-webfont.woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
         div.tooltip {   
  	        position: absolute;           
 	        text-align: center;           
@@ -57,10 +48,24 @@
             background-color: #5fa8d8;
             color: white;
         }
+        .feature {
+            fill: #ccc;
+            cursor: pointer;
+        }
+
+        .feature.active {
+            fill: orange;
+        }
+
+        .mesh {
+            fill: none;
+            stroke: #fff;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
         
     </style>
 </head>
-
 
 <body>
     <div class="container">
@@ -86,6 +91,7 @@
 
     <!-- JavaScript modules -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="visualization.js"></script>
 </body>
 
