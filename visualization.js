@@ -76,7 +76,7 @@ function choosedata(datacol) {
                 .style("stroke-width", "1")
                 .style("fill", function(d) { return ramp(d.properties.value) })
                 .on("mouseover", function(d) {
-                    tooltip.text(d.properties.name + ": " + d.properties.value + " (billion BTU)");
+                    tooltip.text(d.properties.name + ": " + Math.round(d.properties.value*100) + "% of total users");
                     return tooltip.style("visibility", "visible");
                 })
                 .on("mouseout", function() { return tooltip.style("visibility", "hidden"); });
@@ -138,7 +138,7 @@ function choosedata(datacol) {
 };
 
 //set the default visualization
-choosedata('TotalC2014')
+choosedata('desktopUser')
 
 //An example of handling multiple buttons!
 d3.selectAll('button').on('click', function() {
@@ -147,16 +147,16 @@ d3.selectAll('button').on('click', function() {
 
     //determine what to do based on that id
     if (whichButton == 'TotalConsumption') {
-        choosedata('TotalC2014');
+        choosedata('laptopUser');
     } else if (whichButton == 'BiomassConsumption') {
-        choosedata('BiomassC2014');
+        choosedata('mobilePhoneUser');
     } else if (whichButton == 'HydroConsumption') {
-        choosedata('HydroC2014');
+        choosedata('tvBoxUser');
     } else if (whichButton == 'CoalConsumption') {
-        choosedata('CoalC2014');
+        choosedata('tabletUser');
     } else if (whichButton == 'NatGasConsumption') {
-        choosedata('NatGasC2014');
+        choosedata('wearableUser');
     } else if (whichButton == 'FossFuelConsumption') {
-        choosedata('FossFuelC2014');
+        choosedata('internetUser');
     }
 });
