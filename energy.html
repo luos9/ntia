@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YOUR VISUALIZATION TITLE HERE</title>
+
+    <!--bootstrap for styling-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--styling of legend-->
+    <style>
+        path:hover {
+            fill-opacity: 0.65;
+        }
+        
+        .legend {
+            position: absolute;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <!-- content -->
+        <h1>2014 US Energy Consumption By Form And State</h1>
+        <p class="lead">Shiyi Luo</p>
+
+        <!-- more html content can go here; e.g., any data explanation -->
+        <p>(click the selector or mouse over the map)</p>
+        <div id="visContainer">
+            <div class='btn-group'>
+                <button id="TotalConsumption" class="btn btn-primary">Total Consumption</button>
+                <button id="BiomassConsumption" class="btn btn-primary">Biomass</button>
+                <button id="HydroConsumption" class="btn btn-primary">Hydro</button>
+                <button id="CoalConsumption" class="btn btn-primary">Coal</button>
+                <button id="NatGasConsumption" class="btn btn-primary">NatGas</button>
+                <button id="FossFuelConsumption" class="btn btn-primary">FossFuel</button>
+            </div>
+            <div id="tooltip"></div>
+        </div>
+
+
+
+        <p id="citation">Data from <a href="https://www.kaggle.com/lislejoem/us_energy_census_gdp_10-14">Kaggle</a></p>
+    </div>
+
+    <!-- JavaScript modules -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="visualization.js"></script>
+</body>
+
+</html>
