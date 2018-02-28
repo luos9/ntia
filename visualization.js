@@ -3,9 +3,10 @@
 //set width,height and colors
 var width = 500;
 var height = 960;
+var active = d3.select(null);
 
-var highColor = '#08519c'
-var lowColor = '#c6dbef'
+var highColor = '#2c7fb8'
+var lowColor = '#edf8b1'
 
 // D3 Projection
 var projection = d3.geoAlbersUsa()
@@ -21,6 +22,14 @@ var svg = d3.select('#visContainer')
     .append('svg')
     .attr('height', width) //can adjust size as desired
     .attr('width', height);
+    
+var g = svg.append("g")
+    .style("stroke-width", "1.5px");
+
+var div = d3.select("#visContainer")
+	.append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
 
 //the main visualization function that enables loading
 //different data column of the data set
@@ -72,14 +81,30 @@ function choosedata(datacol) {
                 .enter()
                 .append("path")
                 .attr("d", path)
+                .attr("class", "feature")
                 .style("stroke", "#fff")
                 .style("stroke-width", "1")
                 .style("fill", function(d) { return ramp(d.properties.value) })
                 .on("mouseover", function(d) {
-                    tooltip.text(d.properties.name + ": " + Math.round(d.properties.value*100) + "% of total users");
-                    return tooltip.style("visibility", "visible");
+                    div.transition()        
+      	                .duration(200)      
+                        .style("opacity", .9);      
+                    div.text(d.properties.name + ": " + Math.round(d.properties.value*100) + "% of total users")
+                        .style("left", (d3.event.pageX) + "px")     
+                        .style("top", (d3.event.pageY - 28) + "px");
                 })
-                .on("mouseout", function() { return tooltip.style("visibility", "hidden"); });
+                .on("mouseout", function() { 
+                    div.transition()        
+                        .duration(500)      
+                        .style("opacity", 0);  
+                })
+                .on("click", clicked);
+
+            svg.append("path")
+                // needs to modify
+                .datum(topojson.mesh(json, json.features, function(a, b) { return a !== b; }))
+                .attr("class", "mesh")
+                .attr("d", path);
 
 
             // add a legend
@@ -116,14 +141,14 @@ function choosedata(datacol) {
 
             //draw a bar to show color and corresponding data
             key.append("rect")
-                .attr("width", w - 100)
-                .attr("height", h)
+                .attr("width", w - 110)
+                .attr("height", h-5)
                 .style("fill", "url(#gradient)")
                 .attr("transform", "translate(0,10)");
 
             //Create a linear scale for the y values. 
             var y = d3.scaleLinear()
-                .range([h, 0])
+                .range([h, 10])
                 .domain([minVal, maxVal]);
 
             //Define a right axis for the y-scale
@@ -134,8 +159,38 @@ function choosedata(datacol) {
                 .attr("class", "y axis")
                 .call(yAxis);
         });
+        
     })
 };
+
+function clicked(d) {
+    if (active.node() === this) return reset();
+    active.classed("active", false);
+    active = d3.select(this).classed("active", true);
+  
+    var bounds = path.bounds(d),
+        dx = bounds[1][0] - bounds[0][0],
+        dy = bounds[1][1] - bounds[0][1],
+        x = (bounds[0][0] + bounds[1][0]) / 2,
+        y = (bounds[0][1] + bounds[1][1]) / 2,
+        scale = .3 / Math.max(dx / width, dy / height),
+        translate = [width / 2 - scale * x, height / 2 - scale * y];
+  
+    svg.transition()
+        .duration(750)
+        .style("stroke-width", 1.5 / scale + "px")
+        .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+}
+  
+function reset() {
+    active.classed("active", false);
+    active = d3.select(null);
+  
+    g.transition()
+        .duration(750)
+        .style("stroke-width", "1.5px")
+        .attr("transform", "");
+}
 
 //set the default visualization
 choosedata('desktopUser')
@@ -160,3 +215,4 @@ d3.selectAll('button').on('click', function() {
         choosedata('internetUser');
     }
 });
+
