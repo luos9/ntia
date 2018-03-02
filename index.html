@@ -64,6 +64,40 @@
             stroke-linejoin: round;
         }
         
+        body{
+            width:1100px;
+            margin:10px auto;
+        }
+        path {  stroke: #fff; }
+        
+        rect:hover {  fill:blue; }
+        .axis {  font: 10px sans-serif; }
+        .legend tr{    border-bottom:1px solid grey; }
+        .legend tr:first-child{    border-top:1px solid grey; }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }   
+        .x.axis path {  display: none; }
+
+        .legend{
+            margin-bottom:76px;
+            display:inline-block;
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+        .legend td{
+             padding:4px 5px;
+            vertical-align:bottom;
+        }
+        .legendFreq, .legendPerc{
+            align:right;
+            width:50px;
+        }
+        
     </style>
 </head>
 
@@ -85,7 +119,9 @@
                 <button id="FossFuelConsumption" class="btn1">Internet User</button>
             </div>
         </div>
-
+        <p></p>
+        <div id='dashboard'></div>
+        <p></p>
         <p class="class1" id="citation">Data from <a href="https://www.ntia.doc.gov/data/digital-nation-data-explorer">2015 US Census</a></p>
     </div>
 
@@ -93,6 +129,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="visualization.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 
 </html>
