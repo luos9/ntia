@@ -208,4 +208,24 @@ function dashboard(id, fData){
         leg= legend(tF);  // create the legend.
 }
 
+var data = ["People who use internet for emails", "People who use internet for job search", "People who use internet for entertainment", "Other purposes of using internet..."];
+
+var select = d3.select('#dropdown')
+  .append('select')
+  	.attr('class','select')
+    .on('change',onchange)
+
+var options = select
+  .selectAll('option')
+	.data(data).enter()
+	.append('option')
+		.text(function (d) { return d; });
+
+function onchange() {
+	selectValue = d3.select('select').property('value')
+	//d3.select('body')
+		//.append('p')
+		//.text(selectValue + ' is the last selected option.')
+};
+
 dashboard('#dashboard',freqData);

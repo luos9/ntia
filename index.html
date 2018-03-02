@@ -70,7 +70,7 @@
         }
         path {  stroke: #fff; }
         
-        rect:hover {  fill:blue; }
+        rect:hover {  fill:#5fa8d8; }
         .axis {  font: 10px sans-serif; }
         .legend tr{    border-bottom:1px solid grey; }
         .legend tr:first-child{    border-top:1px solid grey; }
@@ -97,6 +97,10 @@
             align:right;
             width:50px;
         }
+
+        #visContainer {
+            margin-bottom: 50px;
+        }
         
     </style>
 </head>
@@ -119,9 +123,13 @@
                 <button id="FossFuelConsumption" class="btn1">Internet User</button>
             </div>
         </div>
-        <p></p>
+        
+        <p class="lead">User Information Dashboard</p>
+        <p class="class1">(put mouse over the bar chart or pie chart to check more details)</p>
+        <div id='dropdown'></div>
         <div id='dashboard'></div>
         <p></p>
+        
         <p class="class1" id="citation">Data from <a href="https://www.ntia.doc.gov/data/digital-nation-data-explorer">2015 US Census</a></p>
     </div>
 
