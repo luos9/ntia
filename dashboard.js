@@ -1,27 +1,30 @@
 var freqData=[
-    {State:'AL',freq:{low:4786, mid:1319, high:249}}
-    ,{State:'AZ',freq:{low:1101, mid:412, high:674}}
-    ,{State:'CT',freq:{low:932, mid:2149, high:418}}
-    ,{State:'DE',freq:{low:832, mid:1152, high:1862}}
-    ,{State:'FL',freq:{low:4481, mid:3304, high:948}}
-    ,{State:'GA',freq:{low:1619, mid:167, high:1063}}
-    ,{State:'IA',freq:{low:1819, mid:247, high:1203}}
-    ,{State:'IL',freq:{low:4498, mid:3852, high:942}}
-    ,{State:'IN',freq:{low:797, mid:1849, high:1534}}
-    ,{State:'KS',freq:{low:162, mid:379, high:471}}
+    {State:'Email',freq:{teenager:4786, young:1319, adult:249, mid:249, senior:1319}}
+    ,{State:'Web',freq:{teenager:1101, young:412, adult:674, mid:249, senior:1319}}
+    ,{State:'Message',freq:{teenager:932, young:2149, adult:418, mid:249, senior:1319}}
+    ,{State:'Shopping',freq:{teenager:832, young:1152, adult:1862, mid:249, senior:1319}}
+    ,{State:'GPS',freq:{teenager:4481, young:3304, adult:948, mid:249, senior:1319}}
+    ,{State:'Social',freq:{teenager:1619, young:167, adult:1063, mid:249, senior:1319}}
+    ,{State:'Finance',freq:{teenager:1819, young:247, adult:1203, mid:249, senior:1319}}
+    ,{State:'Video',freq:{teenager:4498, young:3852, adult:942, mid:249, senior:1319}}
+    ,{State:'Health',freq:{teenager:797, young:1849, adult:1534, mid:249, senior:1319}}
+    ,{State:'Audio',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
+    ,{State:'Job',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
+    ,{State:'Education',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
+    ,{State:'HomeDevice',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
 ];
 
 function dashboard(id, fData){
     var barColor = 'steelblue';
-    function segColor(c){ return {low:"#807dba", mid:"#e08214",high:"#41ab5d"}[c]; }
+    function segColor(c){ return {teenager:"#807dba", young:"#e08214",adult:"#41ab5d",mid:"#e08214",senior:"#41ab5d"}[c]; }
     
     // compute total for each state.
-    fData.forEach(function(d){d.total=d.freq.low+d.freq.mid+d.freq.high;});
+    fData.forEach(function(d){d.total=d.freq.teenager+d.freq.young+d.freq.adult+d.freq.mid+d.freq.senior;});
     
     // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 500 - hGDim.l - hGDim.r, 
+        hGDim.w = 600 - hGDim.l - hGDim.r, 
         hGDim.h = 300 - hGDim.t - hGDim.b;
             
         //create svg for histogram.
@@ -51,7 +54,7 @@ function dashboard(id, fData){
         bars.append("rect")
             .attr("x", function(d) { return x(d[0]); })
             .attr("y", function(d) { return y(d[1]); })
-            .attr("width", x.bandwidth()*0.9)
+            .attr("width", x.bandwidth()*0.85)
             .attr("height", function(d) { return hGDim.h - y(d[1]); })
             .attr('fill',barColor)
             .on("mouseover",mouseover)// mouseover is defined below.
@@ -196,7 +199,7 @@ function dashboard(id, fData){
     }
     
     // calculate total frequency by segment for all state.
-    var tF = ['low','mid','high'].map(function(d){ 
+    var tF = ['teenager','young','adult','mid','senior'].map(function(d){ 
         return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))}; 
     });    
     

@@ -215,4 +215,3 @@ d3.selectAll('button').on('click', function() {
         choosedata('internetUser');
     }
 });
-
