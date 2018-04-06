@@ -89,7 +89,7 @@ function choosedata(datacol) {
                     div.transition()        
       	                .duration(200)      
                         .style("opacity", .9);      
-                    div.text(d.properties.name + ": " + Math.round(d.properties.value*100) + "% of total users")
+                    div.text(Math.round(d.properties.value*100) + "% people in " + d.properties.name + " use this device")
                         .style("left", (d3.event.pageX) + "px")     
                         .style("top", (d3.event.pageY - 28) + "px");
                 })

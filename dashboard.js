@@ -1,22 +1,22 @@
 var freqData=[
-    {State:'Email',freq:{teenager:4786, young:1319, adult:249, mid:249, senior:1319}}
-    ,{State:'Web',freq:{teenager:1101, young:412, adult:674, mid:249, senior:1319}}
-    ,{State:'Message',freq:{teenager:932, young:2149, adult:418, mid:249, senior:1319}}
-    ,{State:'Shopping',freq:{teenager:832, young:1152, adult:1862, mid:249, senior:1319}}
-    ,{State:'GPS',freq:{teenager:4481, young:3304, adult:948, mid:249, senior:1319}}
-    ,{State:'Social',freq:{teenager:1619, young:167, adult:1063, mid:249, senior:1319}}
-    ,{State:'Finance',freq:{teenager:1819, young:247, adult:1203, mid:249, senior:1319}}
-    ,{State:'Video',freq:{teenager:4498, young:3852, adult:942, mid:249, senior:1319}}
-    ,{State:'Health',freq:{teenager:797, young:1849, adult:1534, mid:249, senior:1319}}
-    ,{State:'Audio',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
-    ,{State:'Job',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
-    ,{State:'Education',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
-    ,{State:'HomeDevice',freq:{teenager:162, young:379, adult:471, mid:249, senior:1319}}
+    {State:'Email',freq:{teenager:26, young:255, adult:269, mid:186, senior:25}}
+    ,{State:'Web',freq:{teenager:27, young:256, adult:266, mid:185, senior:25}}
+    ,{State:'Message',freq:{teenager:27, young:262, adult:249, mid:127, senior:10}}
+    ,{State:'Shopping',freq:{teenager:14, young:225, adult:232, mid:141, senior:19}}
+    ,{State:'GPS',freq:{teenager:14, young:231, adult:218, mid:129, senior:14}}
+    ,{State:'Social',freq:{teenager:22, young:231, adult:195, mid:128, senior:16}}
+    ,{State:'Finance',freq:{teenager:4, young:217, adult:212, mid:133, senior:11}}
+    ,{State:'Video',freq:{teenager:26, young:235, adult:196, mid:94, senior:6}}
+    ,{State:'Health',freq:{teenager:8, young:155, adult:166, mid:105, senior:17}}
+    ,{State:'Audio',freq:{teenager:26, young:197, adult:149, mid:59, senior:4}}
+    ,{State:'Job',freq:{teenager:6, young:105, adult:69, mid:19, senior:2}}
+    ,{State:'Class',freq:{teenager:4, young:80, adult:60, mid:24, senior:1}}
+    ,{State:'HomeDevice',freq:{teenager:0, young:29, adult:28, mid:7, senior:1}}
 ];
 
 function dashboard(id, fData){
     var barColor = 'steelblue';
-    function segColor(c){ return {teenager:"#807dba", young:"#e08214",adult:"#41ab5d",mid:"#e08214",senior:"#41ab5d"}[c]; }
+    function segColor(c){ return {teenager:"#a6d854", young:"#66c2a5",adult:"#fc8d62",mid:"#e78ac3",senior:"#8da0cb"}[c]; }
     
     // compute total for each state.
     fData.forEach(function(d){d.total=d.freq.teenager+d.freq.young+d.freq.adult+d.freq.mid+d.freq.senior;});
