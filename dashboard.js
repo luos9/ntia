@@ -1,30 +1,25 @@
 var freqData=[
-    {State:'Email',freq:{teenager:26, young:255, adult:269, mid:186, senior:25}}
-    ,{State:'Web',freq:{teenager:27, young:256, adult:266, mid:185, senior:25}}
-    ,{State:'Message',freq:{teenager:27, young:262, adult:249, mid:127, senior:10}}
-    ,{State:'Shopping',freq:{teenager:14, young:225, adult:232, mid:141, senior:19}}
-    ,{State:'GPS',freq:{teenager:14, young:231, adult:218, mid:129, senior:14}}
-    ,{State:'Social',freq:{teenager:22, young:231, adult:195, mid:128, senior:16}}
-    ,{State:'Finance',freq:{teenager:4, young:217, adult:212, mid:133, senior:11}}
-    ,{State:'Video',freq:{teenager:26, young:235, adult:196, mid:94, senior:6}}
-    ,{State:'Health',freq:{teenager:8, young:155, adult:166, mid:105, senior:17}}
-    ,{State:'Audio',freq:{teenager:26, young:197, adult:149, mid:59, senior:4}}
-    ,{State:'Job',freq:{teenager:6, young:105, adult:69, mid:19, senior:2}}
-    ,{State:'Class',freq:{teenager:4, young:80, adult:60, mid:24, senior:1}}
-    ,{State:'HomeDevice',freq:{teenager:0, young:29, adult:28, mid:7, senior:1}}
-];
+    {State:'Home',freq:{Gen_Z:373, Millennials:460, Gen_X:361, Boomers:465, Gen_V:128}}
+    ,{State:'Work',freq:{Gen_Z:267, Millennials:361, Gen_X:271, Boomers:267, Gen_V:35}}
+    ,{State:'Travel',freq:{Gen_Z:257, Millennials:332, Gen_X:273, Boomers:259, Gen_V:47}}
+    ,{State:'School',freq:{Gen_Z:246, Millennials:139, Gen_X:133, Boomers:74, Gen_V:14}}
+    ,{State:'OthersHome',freq:{Gen_Z:189, Millennials:233, Gen_X:171, Boomers:167, Gen_V:39}}
+    ,{State:'Public',freq:{Gen_Z:175, Millennials:182, Gen_X:150, Boomers:139, Gen_V:29}}
+    ,{State:'Cafe',freq:{Gen_Z:156, Millennials:196, Gen_X:159, Boomers:141, Gen_V:22}}
+    ,{State:'Others',freq:{Gen_Z:7, Millennials:19, Gen_X:10, Boomers:21, Gen_V:1}}
+    ];
 
 function dashboard(id, fData){
     var barColor = 'steelblue';
-    function segColor(c){ return {teenager:"#a6d854", young:"#66c2a5",adult:"#fc8d62",mid:"#e78ac3",senior:"#8da0cb"}[c]; }
+    function segColor(c){ return {Gen_Z:"#a6d854", Millennials:"#66c2a5",Gen_X:"#fc8d62",Boomers:"#e78ac3",Gen_V:"#8da0cb"}[c]; }
     
     // compute total for each state.
-    fData.forEach(function(d){d.total=d.freq.teenager+d.freq.young+d.freq.adult+d.freq.mid+d.freq.senior;});
+    fData.forEach(function(d){d.total=d.freq.Gen_Z+d.freq.Millennials+d.freq.Gen_X+d.freq.Boomers+d.freq.Gen_V;});
     
     // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 600 - hGDim.l - hGDim.r, 
+        hGDim.w = 500 - hGDim.l - hGDim.r, 
         hGDim.h = 300 - hGDim.t - hGDim.b;
             
         //create svg for histogram.
@@ -199,7 +194,7 @@ function dashboard(id, fData){
     }
     
     // calculate total frequency by segment for all state.
-    var tF = ['teenager','young','adult','mid','senior'].map(function(d){ 
+    var tF = ['Gen_Z','Millennials','Gen_X','Boomers','Gen_V'].map(function(d){ 
         return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))}; 
     });    
     
