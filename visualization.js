@@ -37,8 +37,8 @@ function choosedata(datacol) {
     d3.csv("energy.csv", function(data) {
         var minVal = d3.min(data, function(d) { return parseFloat(d[datacol]) })
         var maxVal = d3.max(data, function(d) { return parseFloat(d[datacol]) })
-        //var ramp = d3.scaleLinear().domain([minVal, maxVal]).range([lowColor, highColor])
-        var ramp = d3.scaleLinear().domain([0, 1]).range([lowColor, highColor])
+        var ramp = d3.scaleLinear().domain([minVal, maxVal]).range([lowColor, highColor])
+        //var ramp = d3.scaleLinear().domain([0, 1]).range([lowColor, highColor])
             // Load GeoJSON data and merge with states data
         //d3.json("https://raw.githubusercontent.com/alignedleft/d3-book/master/chapter_12/us-states.json", function(json) {
         d3.json("us-states.json", function(json) {
@@ -89,7 +89,7 @@ function choosedata(datacol) {
                     div.transition()        
       	                .duration(200)      
                         .style("opacity", .9);      
-                    div.text(Math.round(d.properties.value*100) + "% people in " + d.properties.name + " use this device")
+                    div.text(Math.round(d.properties.value*1000)/10 + "% people in " + d.properties.name + " use this device")
                         .style("left", (d3.event.pageX) + "px")     
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
@@ -148,8 +148,8 @@ function choosedata(datacol) {
             //Create a linear scale for the y values. 
             var y = d3.scaleLinear()
                 .range([h-5, 14])
-                //.domain([minVal, maxVal]);
-                .domain([0, 1]);
+                .domain([minVal, maxVal]);
+                //.domain([0, 1]);
 
 
             //Define a right axis for the y-scale

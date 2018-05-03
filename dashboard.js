@@ -101,7 +101,7 @@ function dashboard(id, fData){
     
     // function to handle pieChart.
     function pieChart(pD){
-        var pC ={},    pieDim ={w:400, h: 250};
+        var pC ={},    pieDim ={w:300, h: 250};
         pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
                 
         // create svg for pie chart.
@@ -187,7 +187,7 @@ function dashboard(id, fData){
         }
         
         function getLegend(d,aD){ // Utility function to compute percentage.
-            return d3.format("%")(d.freq/d3.sum(aD.map(function(v){ return v.freq; })));
+            return d3.format(",.1%")(d.freq/d3.sum(aD.map(function(v){ return v.freq; })));
         }
 
         return leg;
