@@ -8,7 +8,7 @@ var freqData=[
     ,{State:'Cafe',freq:{Gen_Z:156, Millennials:196, Gen_X:159, Boomers:141, Gen_V:22}}
     ,{State:'Others',freq:{Gen_Z:7, Millennials:19, Gen_X:10, Boomers:21, Gen_V:1}}
     ];
-
+var totalData = {Gen_Z:1670, Millennials:1922, Gen_X:1528, Boomers:1533, Gen_V:315};
 function dashboard(id, fData){
     var barColor = 'steelblue';
     function segColor(c){ return {Gen_Z:"#a6d854", Millennials:"#66c2a5",Gen_X:"#fc8d62",Boomers:"#e78ac3",Gen_V:"#8da0cb"}[c]; }
@@ -56,7 +56,7 @@ function dashboard(id, fData){
             .on("mouseout",mouseout);// mouseout is defined below.
             
         //Create the frequency labels above the rectangles.
-        bars.append("text").text(function(d){ return d3.format(",")(d[1])})
+        bars.append("text").text(function(d){ return d3.format(",.1%")(d[1])})
             .attr("x", function(d) { return x(d[0])+x.bandwidth()/2; })
             .attr("y", function(d) { return y(d[1])-5; })
             .attr("text-anchor", "middle");
@@ -65,7 +65,7 @@ function dashboard(id, fData){
             // filter for selected state.
             var st = fData.filter(function(s){ return s.State == d[0];})[0],
                 nD = d3.keys(st.freq).map(function(s){ return {type:s, freq:st.freq[s]};});
-               
+            //console.log(nD)
             // call update functions of pie-chart and legend.    
             pC.update(nD);
             leg.update(nD);
@@ -84,6 +84,7 @@ function dashboard(id, fData){
             
             // Attach the new data to the bars.
             var bars = hGsvg.selectAll(".bar").data(nD);
+            //console.log(nD)
             
             // transition the height and color of rectangles.
             bars.select("rect").transition().duration(500)
@@ -93,7 +94,7 @@ function dashboard(id, fData){
 
             // transition the frequency labels location and change value.
             bars.select("text").transition().duration(500)
-                .text(function(d){ return d3.format(",")(d[1])})
+                .text(function(d){ return d3.format(",.1%")(d[1])})
                 .attr("y", function(d) {return y(d[1])-5; });            
         }        
         return hG;
@@ -130,13 +131,13 @@ function dashboard(id, fData){
         function mouseover(d){
             // call the update function of histogram with new data.
             hG.update(fData.map(function(v){ 
-                return [v.State,v.freq[d.data.type]];}),segColor(d.data.type));
+                return [v.State,d3.format(",.4f")(v.freq[d.data.type]/totalData[d.data.type])];}),segColor(d.data.type));
         }
         //Utility function to be called on mouseout a pie slice.
         function mouseout(d){
             // call the update function of histogram with all data.
             hG.update(fData.map(function(v){
-                return [v.State,v.total];}), barColor);
+                return [v.State,d3.format(",.4f")(v.total/6968)];}), barColor);
         }
         // Animating the pie-slice requiring a custom function which specifies
         // how the intermediate paths should be drawn.
@@ -199,7 +200,7 @@ function dashboard(id, fData){
     });    
     
     // calculate total frequency by state for all segment.
-    var sF = fData.map(function(d){return [d.State,d.total];});
+    var sF = fData.map(function(d){return [d.State,(d3.format(",.4f")(d.total/6968.0))];});
 
     var hG = histoGram(sF), // create the histogram.
         pC = pieChart(tF), // create the pie-chart.
