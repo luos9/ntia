@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Digital Nation Capstone - Interactive Visulization</title>
+    <title>Digital Nation Capstone - State Level Profile</title>
 
     <!--bootstrap for styling-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,7 +12,7 @@
         div.tooltip {   
  	        position: absolute;           
 	        text-align: center;           
-	        width: 120px;                  
+	        width: 120px;                                 
 	        padding: 4px;             
 	        font: 13px;
             font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;        
@@ -115,9 +115,21 @@
 <body>
     <div class="container">
         <!-- content -->
-        <h1>Digital Nation Data Visualization</h1>
+        <h2>Digital Nation Data Visualization</h2>
+
         <!-- more html content can go here; e.g., any data explanation -->
-        <p class="lead">Section I: Internet Usage by State</p>
+        <div id="DeviceTitle" style="display: none;">
+        <p class="lead">Section I: Percentage of People Using Different Devices by State</p>
+        <p class="class1">Click the selector to choose an internet device, then mouse over the map to see % of people using this device in each state.</p>
+        </div>
+        <div id="LocationTitle">
+                <p class="lead">Section I: Percentage of People Using Internet at Different Locations by State</p>
+                <p class="class1">Click the selector to choose location, then mouse over the map to see % of people using Internet in each state.</p>
+        </div>
+        <div id="ReasonTitle" style="display: none;">
+                <p class="lead">Section I: Percentage of People Don't use Internet at home for Different Reasons by State</p>
+                <p class="class1">Click the selector to choose reason, then mouse over the map to see % of people don't use Internet at home in each state.</p>
+        </div>
         <div id="visContainer">
             <div>
                 <select>
@@ -128,10 +140,10 @@
             </div>
             <br />
             <div id="DeviceDiv" class='btn-group' style="display: none;">
-                <button id="TotalConsumption" class="btn1">Mobile Phone User</button>
-                <button id="BiomassConsumption" class="btn1">Laptop User</button>
-                <button id="HydroConsumption" class="btn1">Tablet User</button>
-                <button id="CoalConsumption" class="btn1">TV Box User</button>
+                <button id="TotalConsumption" class="btn1">Laptop User</button>
+                <button id="BiomassConsumption" class="btn1">Mobile Phone User</button>
+                <button id="HydroConsumption" class="btn1">TV Box User</button>
+                <button id="CoalConsumption" class="btn1">Tablet User</button>
                 <button id="NatGasConsumption" class="btn1">Wearable Device User</button>
                 <button id="FossFuelConsumption" class="btn1">Internet User</button>
             </div>
@@ -139,9 +151,9 @@
                 <button id="TotalConsumption" class="btn1">Home</button>
                 <button id="BiomassConsumption" class="btn1">Work</button>
                 <button id="HydroConsumption" class="btn1">Travel</button>
-                <button id="CoalConsumption" class="btn1">Cafe</button>
+                <button id="CoalConsumption" class="btn1">School</button>
                 <button id="NatGasConsumption" class="btn1">Public</button>
-                <button id="FossFuelConsumption" class="btn1">School</button>
+                <button id="FossFuelConsumption" class="btn1">Cafe</button>
             </div>
             <div id="ReasonDiv" class='btn-group' style="display: none;">
                     <button id="TotalConsumption" class="btn1">No need/interests</button>
@@ -154,7 +166,7 @@
         </div>
         
         <p class="lead">Section II: Different Locations of Using Internet with Age Distribution in Washington State</p>
-        <p class="class1">1. Mouse hover the pie chart to see percentages of people using Internet at each location in an age group;</p>
+        <p class="class1">1. Mouse hover the pie chart to see number of people using Internet at each location in an age group;</p>
         <p class="class1">2. Mouse hover the bar chart to see the age distribution of people using Internet at a specific location.</p>
         
         <!--div id='dropdown'></div-->
@@ -170,7 +182,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="visualization2.js"></script>
-    <script src="dashboard2.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 
 </html>
