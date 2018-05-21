@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Digital Nation Capstone - State Level Profile</title>
+    <title>Digital Nation Capstone - Interactive Visulization</title>
 
     <!--bootstrap for styling-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,7 +12,7 @@
         div.tooltip {   
  	        position: absolute;           
 	        text-align: center;           
-	        width: 120px;                                 
+	        width: 120px;                  
 	        padding: 4px;             
 	        font: 13px;
             font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;        
@@ -115,58 +115,12 @@
 <body>
     <div class="container">
         <!-- content -->
-        <h2>Digital Nation Data Visualization</h2>
-
+        <h1>Digital Nation Data Visualization</h1>
         <!-- more html content can go here; e.g., any data explanation -->
-        <div id="DeviceTitle" style="display: none;">
-        <p class="lead">Section I: Percentage of People Using Different Devices by State</p>
-        <p class="class1">Click the selector to choose an internet device, then mouse over the map to see % of people using this device in each state.</p>
-        </div>
-        <div id="LocationTitle">
-                <p class="lead">Section I: Percentage of People Using Internet at Different Locations by State</p>
-                <p class="class1">Click the selector to choose location, then mouse over the map to see % of people using Internet in each state.</p>
-        </div>
-        <div id="ReasonTitle" style="display: none;">
-                <p class="lead">Section I: Percentage of People Don't use Internet at home for Different Reasons by State</p>
-                <p class="class1">Click the selector to choose reason, then mouse over the map to see % of people don't use Internet at home in each state.</p>
-        </div>
-        <div id="visContainer">
-            <div>
-                <select>
-                    <option id="Location">Internet Usage By Locations</option>
-                    <option id="Device">Internet Usage By Devices</option>
-                    <option id="Reason">Main Reason for not going online at home</option>
-                </select>
-            </div>
-            <br />
-            <div id="DeviceDiv" class='btn-group' style="display: none;">
-                <button id="TotalConsumption" class="btn1">Laptop User</button>
-                <button id="BiomassConsumption" class="btn1">Mobile Phone User</button>
-                <button id="HydroConsumption" class="btn1">TV Box User</button>
-                <button id="CoalConsumption" class="btn1">Tablet User</button>
-                <button id="NatGasConsumption" class="btn1">Wearable Device User</button>
-                <button id="FossFuelConsumption" class="btn1">Internet User</button>
-            </div>
-            <div id="LocationDiv" class='btn-group' style="display: '';">
-                <button id="TotalConsumption" class="btn1">Home</button>
-                <button id="BiomassConsumption" class="btn1">Work</button>
-                <button id="HydroConsumption" class="btn1">Travel</button>
-                <button id="CoalConsumption" class="btn1">School</button>
-                <button id="NatGasConsumption" class="btn1">Public</button>
-                <button id="FossFuelConsumption" class="btn1">Cafe</button>
-            </div>
-            <div id="ReasonDiv" class='btn-group' style="display: none;">
-                    <button id="TotalConsumption" class="btn1">No need/interests</button>
-                    <button id="BiomassConsumption" class="btn1">Too expensive</button>
-                    <button id="HydroConsumption" class="btn1">No computer</button>
-                    <button id="CoalConsumption" class="btn1">Can use elsewhere</button>
-                    <button id="NatGasConsumption" class="btn1">Privacy concern</button>
-                    <button id="FossFuelConsumption" class="btn1">Not available</button>
-                </div>
-        </div>
+
         
         <p class="lead">Section II: Different Locations of Using Internet with Age Distribution in Washington State</p>
-        <p class="class1">1. Mouse hover the pie chart to see number of people using Internet at each location in an age group;</p>
+        <p class="class1">1. Mouse hover the pie chart to see percentages of people using Internet at each location in an age group;</p>
         <p class="class1">2. Mouse hover the bar chart to see the age distribution of people using Internet at a specific location.</p>
         
         <!--div id='dropdown'></div-->
@@ -175,14 +129,14 @@
         
         <p class="class1">(Generation Z:7-22, Millennials:23-38, Generation X:39-52, Baby Boomers:53-71, Generation V:72+)</p>
         <p class="h1"></p>
+        <p class="lead"><a href="index.html">Section I</a></p>
         <p class="class1" id="citation">Data from <a href="https://www.ntia.doc.gov/data/digital-nation-data-explorer">2015 NTIA Digital Nation Data</a></p>
     </div>
 
     <!-- JavaScript modules -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
-    <script src="visualization2.js"></script>
-    <script src="dashboard.js"></script>
+    <script src="dashboard2.js"></script>
 </body>
 
 </html>

@@ -171,7 +171,12 @@ var myData=
    // {State:'location',freq:['homeInternetUser','workInternetUser','travelingInternetUser','schoolInternetUser','libCommInternetUser','cafeInternetUser']}];
    {"Internet Usage By Locations":['homeInternetUser','workInternetUser','travelingInternetUser','cafeInternetUser','libCommInternetUser','schoolInternetUser'],
    "Internet Usage By Devices":['mobilePhoneUser','laptopUser','tabletUser','tvBoxUser','wearableUser','internetUser'],
-   "Main Reason for not going online at home":['noNeedInterestMainReason','tooExpensiveMainReason','noComputerMainReason','canUseElsewhereMainReason','privSecMainReason','unavailableMainReason']};
+   "Main Reason for not going online at home":['noNeedInterestMainReason','tooExpensiveMainReason','noComputerMainReason','canUseElsewhereMainReason','privSecMainReason','unavailableMainReason'],
+   "Online Activities":['healthRecordsUser','webUser','homeIOTUser','callConfUser','healthInfoUser','jobSearchUser','eCommerceUser','audioUser','onlineClassUser','teleworkUser','emailUser','healthMonitoringUser','financeUser','locationServicesUser','socialNetworkUser','textIMUser','videoUser'],
+    "Internet service technologies":['wiredHighSpeedAtHome','mobileAtHome','satelliteAtHome','dialUpAtHome','mobileOutsideHome'],
+    "Home Internet Bundling":['homeIncludedInternet','tvInBundle','homePhoneInBundle','mobilePhoneInBundle','homeSecInBundle'],
+    "Most Important Aspect of Home Internet Usage":['reliabilityMostImportant','speedMostImportant','affordabilityMostImportant','dataCapMostImportant','mobilityMostImportant','serviceMostImportant']
+};
 var Tooltip=
    // {State:'location',freq:['homeInternetUser','workInternetUser','travelingInternetUser','schoolInternetUser','libCommInternetUser','cafeInternetUser']}];
    {'Internet Usage By Locations':{'homeInternetUser':' use Internet at home',
@@ -191,9 +196,41 @@ var Tooltip=
     ,'noComputerMainReason':' don\'t use Internet because of no computer',
     'canUseElsewhereMainReason':' don\'t use Internet because can use elsewhere',
     'privSecMainReason':' don\'t use Internet because of privacy concern',
-    'unavailableMainReason':' don\'t use Internet because Internet not available'}
+    'unavailableMainReason':' don\'t use Internet because Internet not available'},
+    "Online Activities":{'healthRecordsUser':'use Internet for health record'
+    ,'webUser':'use Internet for websites'
+    ,'homeIOTUser':'use Internet for home IOT device'
+    ,'callConfUser':'use Internet for call conference',
+    'healthInfoUser':'use Internet for health information',
+    'jobSearchUser':'use Internet for job searching',
+    'eCommerceUser':'use Internet for ecommerce',
+    'audioUser':'use Internet for audio',
+    'onlineClassUser':'use Internet for online class'
+    ,'teleworkUser':'use Internet for telework',
+    'emailUser':'use Internet for email',
+    'healthMonitoringUser':'use Internet for health monitor',
+    'financeUser':'use Internet for finance',
+    'locationServicesUser':'use Internet for location service',
+    'socialNetworkUser':'use Internet for social network ',
+    'textIMUser':'use Internet for text message',
+    'videoUser':'use Internet for health video'},
+    "Internet service technologies":{'wiredHighSpeedAtHome':'have access of wired HighSpeed Internet At Home',
+    'mobileAtHome':'have access of mobile Internet At Home'
+    ,'satelliteAtHome':'have access of satellite Internet At Home',
+    'dialUpAtHome':'have access of dial up Internet At Home',
+    'mobileOutsideHome':'have access of mobile Internet outside Home'},
+    "Home Internet Bundling":{'homeIncludedInternet':'Internet Bundling included in Home Plan',
+    'tvInBundle':'Internet Bundling included in tv Plan',
+    'homePhoneInBundle':'Internet Bundling included in Home Phone Plan',
+    'mobilePhoneInBundle':'Internet Bundling included in mobile phone Plan',
+    'homeSecInBundle':'Internet Bundling included in Home security Plan'},
+    "Most Important Aspect of Home Internet Usage":{'reliabilityMostImportant':'think reliability is the most important',
+    'speedMostImportant':'think speed is the most important',
+    'affordabilityMostImportant':'think affordability is the most important',
+    'dataCapMostImportant':'think data Cap is the most important',
+    'mobilityMostImportant':'think mobility is the most important',
+    'serviceMostImportant':'think customer service is the most important'}
 }
-//console.log(myData.location)
 
 choosedata(myData['Internet Usage By Locations'][0],'Internet Usage By Locations')
 var selected = "Internet Usage By Locations"
@@ -208,35 +245,69 @@ d3.select('select').on('change', function Myfunction() {
         d3.select("#DeviceDiv").attr('style',"display: '';");
         d3.select("#LocationDiv").attr('style',"display: none;");
         d3.select("#ReasonDiv").attr('style',"display: none;");
+        d3.select("#OnlineDiv").attr('style',"display: none;");
+        d3.select("#HomeBundDiv").attr('style',"display: none;");
+        d3.select("#IntSevDiv").attr('style',"display: none;");
+        d3.select("#MostDiv").attr('style',"display: none;");
     }
     else if (selection == "Internet Usage By Locations") {
         d3.select("#LocationDiv").attr('style',"display: '';");
         d3.select("#DeviceDiv").attr('style',"display: none;");
         d3.select("#ReasonDiv").attr('style',"display: none;");
+        d3.select("#OnlineDiv").attr('style',"display: none;");
+        d3.select("#HomeBundDiv").attr('style',"display: none;");
+        d3.select("#IntSevDiv").attr('style',"display: none;");
+        d3.select("#MostDiv").attr('style',"display: none;");
     }
      else if (selection == "Main Reason for not going online at home"){
         d3.select("#ReasonDiv").attr('style',"display: '';");
         d3.select("#DeviceDiv").attr('style',"display: none;")
         d3.select("#LocationDiv").attr('style', "display: none;")
+        d3.select("#OnlineDiv").attr('style',"display: none;");
+        d3.select("#HomeBundDiv").attr('style',"display: none;");
+        d3.select("#IntSevDiv").attr('style',"display: none;");
+        d3.select("#MostDiv").attr('style',"display: none;");
+    }
+    else if (selection == "Online Activities"){
+        d3.select("#ReasonDiv").attr('style',"display: none;");
+        d3.select("#DeviceDiv").attr('style',"display: none;")
+        d3.select("#LocationDiv").attr('style', "display: none;")
+        d3.select("#OnlineDiv").attr('style',"display: '';");
+        d3.select("#HomeBundDiv").attr('style',"display: none;");
+        d3.select("#IntSevDiv").attr('style',"display: none;");
+        d3.select("#MostDiv").attr('style',"display: none;");
+    }  
+    else if (selection == "Internet service technologies"){
+        d3.select("#ReasonDiv").attr('style',"display: none;");
+        d3.select("#DeviceDiv").attr('style',"display: none;")
+        d3.select("#LocationDiv").attr('style', "display: none;")
+        d3.select("#OnlineDiv").attr('style',"display: none;");
+        d3.select("#HomeBundDiv").attr('style',"display: none;");
+        d3.select("#IntSevDiv").attr('style',"display: '';");
+        d3.select("#MostDiv").attr('style',"display: none;");
+    }  
+    else if (selection == "Home Internet Bundling"){
+        d3.select("#ReasonDiv").attr('style',"display: none;");
+        d3.select("#DeviceDiv").attr('style',"display: none;")
+        d3.select("#LocationDiv").attr('style', "display: none;")
+        d3.select("#OnlineDiv").attr('style',"display: none;");
+        d3.select("#HomeBundDiv").attr('style',"display: '';");
+        d3.select("#IntSevDiv").attr('style',"display: none;");
+        d3.select("#MostDiv").attr('style',"display: none;");
+    }  
+    else if (selection == "Most Important Aspect of Home Internet Usage"){
+        d3.select("#ReasonDiv").attr('style',"display: none;");
+        d3.select("#DeviceDiv").attr('style',"display: none;")
+        d3.select("#LocationDiv").attr('style', "display: none;")
+        d3.select("#OnlineDiv").attr('style',"display: none;");
+        d3.select("#HomeBundDiv").attr('style',"display: none;");
+        d3.select("#IntSevDiv").attr('style',"display: none;");
+        d3.select("#MostDiv").attr('style',"display: '';");
     }  
 })  
 
-
 d3.selectAll('button').on('click', function() {
-    //get the id of which element caused the event
     var whichButton = d3.select(d3.event.target).attr('id');
-    //determine what to do based on that id
-    if (whichButton == 'TotalConsumption') {
-        choosedata(myData[currentSelect][0],currentSelect);
-    }  else if (whichButton == 'BiomassConsumption') {
-        choosedata(myData[currentSelect][1],currentSelect);
-    } else if (whichButton == 'HydroConsumption') {
-        choosedata(myData[currentSelect][2],currentSelect);
-    } else if (whichButton == 'CoalConsumption') {
-        choosedata(myData[currentSelect][3],currentSelect);
-    } else if (whichButton == 'NatGasConsumption') {
-        choosedata(myData[currentSelect][4],currentSelect);
-    } else if (whichButton == 'FossFuelConsumption') {
-        choosedata(myData[currentSelect][5],currentSelect);
-    } 
+    whichButton = Number(whichButton)
+    choosedata(myData[currentSelect][whichButton],currentSelect)
 });
