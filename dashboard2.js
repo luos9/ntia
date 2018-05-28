@@ -1,14 +1,15 @@
 var freqData=[
-    {State:'Home',freq:{'7-22':373, '23-38':460, '39-52':361, '53-71':465, '72+':128}}
-    ,{State:'Work',freq:{'7-22':267, '23-38':361, '39-52':271, '53-71':267, '72+':35}}
+    {State:'Home',freq:{'7-22':314, '23-38':428, '39-52':340, '53-71':433, '72+':167}}
+    ,{State:'Work',freq:{'7-22':20, '23-38':262, '39-52':218, '53-71':193, '72+':8}}
     ,{State:'Travel',freq:{'7-22':257, '23-38':332, '39-52':273, '53-71':259, '72+':47}}
-    ,{State:'School',freq:{'7-22':246, '23-38':139, '39-52':133, '53-71':74, '72+':14}}
-    ,{State:'OthersHome',freq:{'7-22':189, '23-38':233, '39-52':171, '53-71':167, '72+':39}}
-    ,{State:'Public',freq:{'7-22':175, '23-38':182, '39-52':150, '53-71':139, '72+':29}}
-    ,{State:'Cafe',freq:{'7-22':156, '23-38':196, '39-52':159, '53-71':141, '72+':22}}
-    ,{State:'Others',freq:{'7-22':7, '23-38':19, '39-52':10, '53-71':21, '72+':1}}
+    ,{State:'School',freq:{'7-22':212, '23-38':35, '39-52':10, '53-71':9, '72+':21}}
+    ,{State:'OthersHome',freq:{'7-22':140, '23-38':202, '39-52':130, '53-71':130, '72+':43}}
+    ,{State:'Public',freq:{'7-22':115, '23-38':137, '39-52':111, '53-71':91, '72+':31}}
+    ,{State:'Cafe',freq:{'7-22':78, '23-38':168, '39-52':130, '53-71':109, '72+':19}}
+    ,{State:'Others',freq:{'7-22':4, '23-38':16, '39-52':10, '53-71':16, '72+':2}}
     ];
-var totalData = {'7-22':1670, '23-38':1922, '39-52':1528, '53-71':1533, '72+':315};
+    
+var totalData = {'7-22':449, '23-38':532, '39-52':433, '53-71':587, '72+':412};
 function dashboard(id, fData){
     var barColor = 'steelblue';
     function segColor(c){ return {'7-22':"#a6d854", '23-38':"#66c2a5",'39-52':"#fc8d62",'53-71':"#e78ac3",'72+':"#8da0cb"}[c]; }
@@ -137,7 +138,7 @@ function dashboard(id, fData){
         function mouseout(d){
             // call the update function of histogram with all data.
             hG.update(fData.map(function(v){
-                return [v.State,d3.format(",.4f")(v.total/6968)];}), barColor);
+                return [v.State,d3.format(",.4f")(v.total/2413)];}), barColor);
         }
         // Animating the pie-slice requiring a custom function which specifies
         // how the intermediate paths should be drawn.
@@ -168,8 +169,8 @@ function dashboard(id, fData){
         tr.append("td").text(function(d){ return d.type;});
 
         // create the third column for each segment.
-        tr.append("td").attr("class",'legendFreq')
-            .text(function(d){ return d3.format(",")(d.freq);});
+        //tr.append("td").attr("class",'legendFreq')
+            //.text(function(d){ return d3.format(",")(d.freq);});
 
         // create the fourth column for each segment.
         tr.append("td").attr("class",'legendPerc')
@@ -200,7 +201,7 @@ function dashboard(id, fData){
     });    
     
     // calculate total frequency by state for all segment.
-    var sF = fData.map(function(d){return [d.State,(d3.format(",.4f")(d.total/6968.0))];});
+    var sF = fData.map(function(d){return [d.State,(d3.format(",.4f")(d.total/2413.0))];});
 
     var hG = histoGram(sF), // create the histogram.
         pC = pieChart(tF), // create the pie-chart.
