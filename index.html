@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Digital Nation Data Visualization</title>
+    <title>Digital Nation Capstone - Interactive Visulization</title>
 
     <!--bootstrap for styling-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,7 +13,6 @@
  	        position: absolute;           
 	        text-align: center;           
 	        width: 120px;                  
-	        height: 40px;                 
 	        padding: 4px;             
 	        font: 13px;
             font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;        
@@ -45,7 +44,7 @@
 
         }
         .btn1:hover {
-            background-color: #5fa8d8;
+            background-color: #3a943f70;
             color: white;
         }
         .feature {
@@ -101,6 +100,14 @@
         #visContainer {
             margin-bottom: 50px;
         }
+
+        #DeviceDiv {
+            float: left;
+        }
+
+        #LocationDiv {
+            float: left;
+        }
         
     </style>
 </head>
@@ -109,35 +116,104 @@
     <div class="container">
         <!-- content -->
         <h1>Digital Nation Data Visualization</h1>
-        <p class="lead">State Level User Profile</p>
-
         <!-- more html content can go here; e.g., any data explanation -->
-        <p class="class1">(click the selector or mouse over the map)</p>
+        <p class="lead">Section I: Internet Usage by State</p>
         <div id="visContainer">
-            <div class='btn-group'>
-                <button id="TotalConsumption" class="btn1">Laptop User</button>
-                <button id="BiomassConsumption" class="btn1">Mobile Phone User</button>
-                <button id="HydroConsumption" class="btn1">TV Box User</button>
-                <button id="CoalConsumption" class="btn1">Tablet User</button>
-                <button id="NatGasConsumption" class="btn1">Wearable Device User</button>
-                <button id="FossFuelConsumption" class="btn1">Internet User</button>
+            <div>
+                <select>
+                    <option id="Location">Internet Usage By Locations</option>
+                    <option id="Device">Internet Usage By Devices</option>
+                    <option id="Reason">Main Reason for not going online at home</option>
+                    <option id="Online">Online Activities</option>
+                    <option id="InterSer">Internet service technologies</option>
+                    <option id="HomeB">Home Internet Bundling</option>
+                    <option id="Most">Most Important Aspect of Home Internet Usage</option>
+                </select>
             </div>
+            <br />
+            <div id="DeviceDiv" class='btn-group' style="display: none;">
+                <button id="0" class="btn1">Mobile Phone User</button>
+                <button id="1" class="btn1">Laptop User</button>
+                <button id="2" class="btn1">Tablet User</button>
+                <button id="3" class="btn1">TV Box User</button>
+                <button id="4" class="btn1">Wearable Device User</button>
+                <button id="5" class="btn1">Internet User</button>
+            </div>
+            <div id="LocationDiv" class='btn-group' style="display: '';">
+                <button id="0" class="btn1">Home</button>
+                <button id="1" class="btn1">Work</button>
+                <button id="2" class="btn1">Travel</button>
+                <button id="3" class="btn1">Cafe</button>
+                <button id="4" class="btn1">Public</button>
+                <button id="5" class="btn1">School</button>
+            </div>
+            <div id="ReasonDiv" class='btn-group' style="display: none;">
+                    <button id="0" class="btn1">No need/interests</button>
+                    <button id="1" class="btn1">Too expensive</button>
+                    <button id="2" class="btn1">No computer</button>
+                    <button id="3" class="btn1">Can use elsewhere</button>
+                    <button id="4" class="btn1">Privacy concern</button>
+                    <button id="5" class="btn1">Not available</button>
+            </div>
+            <div id="OnlineDiv" class='btn-group' style="display: none;">
+                <button id="0" class="btn1">Health Record</button>
+                <button id="1" class="btn1">Web</button>
+                <button id="2" class="btn1">Home IOT</button>
+                <button id="3" class="btn1">Call Conference</button>
+                <button id="4" class="btn1">Health Information</button>
+                <button id="5" class="btn1">Job Search</button>
+                <button id="6" class="btn1">eCommerce</button>
+                <button id="7" class="btn1">Audio</button>
+                <button id="8" class="btn1">Online Class</button>
+                <button id="9" class="btn1">Telework</button>
+                <button id="10" class="btn1">Email</button>
+                <button id="11" class="btn1">Health Monitor</button>
+                <button id="12" class="btn1">Finance</button>
+                <button id="13" class="btn1">Location Service</button>
+                <button id="14" class="btn1">Social Network</button>
+                <button id="15" class="btn1">Text Message</button>
+                <button id="16" class="btn1">Video</button>
+            </div>
+            <div id="HomeBundDiv" class='btn-group' style="display: none;">
+                <button id="0" class="btn1">Home Internet Included</button>
+                <button id="1" class="btn1">TV InBundle</button>
+                <button id="2" class="btn1">Home Phone InBundle</button>
+                <button id="3" class="btn1">Mobile Phone InBundle</button>
+                <button id="4" class="btn1">HomeSecurity InBundle</button>
+
+            </div>
+            <div id="IntSevDiv" class='btn-group' style="display: none;">
+                <button id="0" class="btn1">Wired HighSpeed</button>
+                <button id="1" class="btn1">Mobile At Home</button>
+                <button id="2" class="btn1">Satellite</button>
+                <button id="3" class="btn1">Dial Up</button>
+                <button id="4" class="btn1">Mobile Outside Home</button>
+            </div>
+            <div id="MostDiv" class='btn-group' style="display: none;">
+                <button id="0" class="btn1">Reliability</button>
+                <button id="1" class="btn1">Speed</button>
+                <button id="2" class="btn1">Affordability</button>
+                <button id="3" class="btn1">Data Cap</button>
+                <button id="4" class="btn1">Mobility</button>
+                <button id="5" class="btn1">Customer Service</button>
+            </div>
+            <br>
+            <br>
+            <p class="class1">Age 3+ Civilian Persons</p> 
+
         </div>
         
-        <p class="lead">User Information Dashboard</p>
-        <p class="class1">(put mouse over the bar chart or pie chart to check more details)</p>
-        <div id='dropdown'></div>
-        <div id='dashboard'></div>
-        <p></p>
-        
-        <p class="class1" id="citation">Data from <a href="https://www.ntia.doc.gov/data/digital-nation-data-explorer">2015 US Census</a></p>
+        <p class="lead"><a href="sectiontwo.html">Section II</a></p>
+        <p class="class1" id="citation">Data(Weighted) from <a href="https://www.ntia.doc.gov/data/digital-nation-data-explorer">2015 NTIA Digital Nation Data</a></p>
     </div>
+    
+
+
 
     <!-- JavaScript modules -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
-    <script src="visualization.js"></script>
-    <script src="dashboard.js"></script>
+    <script src="visualization2.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Nation Capstone - Interactive Visulization</title>
+
+    <!--bootstrap for styling-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--styling of legend-->
+    <style>
+        div.tooltip {   
+ 	        position: absolute;           
+	        text-align: center;           
+	        width: 120px;                  
+	        padding: 4px;             
+	        font: 13px;
+            font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;        
+	        background: white;   
+	        border: 0px;      
+	        border-radius: 8px;           
+	        pointer-events: none;         
+        }
+
+        path:hover {
+            fill-opacity: 0.65;
+        }
+        
+        .legend {
+            position: absolute;
+        }
+
+        p.class1 {
+            font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
+
+        button.btn1 {
+            background-color:#2c7fb8;
+            float: left;
+            color: white;
+            padding: 5px 10px;
+            font-size: 13px;
+            font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+
+        }
+        .btn1:hover {
+            background-color: #3a943f70;
+            color: white;
+        }
+        .feature {
+            fill: #ccc;
+            cursor: pointer;
+        }
+
+        .feature.active {
+            fill: orange;
+        }
+
+        .mesh {
+            fill: none;
+            stroke: #fff;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        body{
+            width:1100px;
+            margin:10px auto;
+        }
+        path {  stroke: #fff; }
+        
+        rect:hover {  fill:#5fa8d8; }
+        .axis {  font: 10px sans-serif; }
+        .legend tr{    border-bottom:1px solid grey; }
+        .legend tr:first-child{    border-top:1px solid grey; }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }   
+        .x.axis path {  display: none; }
+
+        .legend{
+            margin-bottom:76px;
+            display:inline-block;
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+        .legend td{
+             padding:4px 5px;
+            vertical-align:bottom;
+        }
+        .legendFreq, .legendPerc{
+            align:right;
+            width:50px;
+        }
+
+        #visContainer {
+            margin-bottom: 50px;
+        }
+
+        #DeviceDiv {
+            float: left;
+        }
+
+        #LocationDiv {
+            float: left;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- content -->
+        <h1>Digital Nation Data Visualization</h1>
+        <!-- more html content can go here; e.g., any data explanation -->
+        
+        <p id="title" class="lead">Section II: Different Locations of Using Internet with Demographic Distribution in Washington State</p>
+        <p class="class1">1. Mouse hover the pie chart to see percentages of people using Internet at each location in an age group;</p>
+        <p class="class1">2. Mouse hover the bar chart to see the age distribution of people using Internet at a specific location.</p>
+        
+        <!--div id='dropdown'></div-->
+        <div>
+                <b>Selected State:</b>
+                <select onchange="onFunction(this)">
+                        <option value='Washington'>Washington</option>
+                        <option value='Alabama'>Alabama</option>
+                        <option value='Connecticut'>Connecticut</option>
+                        <option value='Delaware'>Delaware</option>
+                        <option value='District of Columbia'>District of Columbia</option>
+                        <option value='Florida'>Florida</option>
+                        <option value='Georgia'>Georgia</option>
+                        <option value='Kentucky'>Kentucky</option>
+                        <option value='Louisiana'>Louisiana</option>
+                        <option value='Maine'>Maine</option>
+                        <option value='Maryland'>Maryland</option>
+                        <option value='Massachusetts'>Massachusetts</option>
+                        <option value='Mississippi'>Mississippi</option>
+                        <option value='New Hampshire'>New Hampshire</option>
+                        <option value='New Jersey'>New Jersey</option>
+                        <option value='New York'>New York</option>
+                        <option value='North Carolina'>North Carolina</option>
+                        <option value='Ohio'>Ohio</option>
+                        <option value='Pennsylvania'>Pennsylvania</option>
+                        <option value='Rhode Island'>Rhode Island</option>
+                        <option value='South Carolina'>South Carolina</option>
+                        <option value='Tennessee'>Tennessee</option>
+                        <option value='Vermont'>Vermont</option>
+                        <option value='Virginia'>Virginia</option>
+                        <option value='Alaska'>Alaska</option>
+                        <option value='Arizona'>Arizona</option>
+                        <option value='Arkansas'>Arkansas</option>
+                        <option value='California'>California</option>
+                        <option value='Colorado'>Colorado</option>
+                        <option value='Hawaii'>Hawaii</option>
+                        <option value='Idaho'>Idaho</option>
+                        <option value='Illinois'>Illinois</option>
+                        <option value='Indiana'>Indiana</option>
+                        <option value='Iowa'>Iowa</option>
+                        <option value='Kansas'>Kansas</option>
+                        <option value='Michigan'>Michigan</option>
+                        <option value='Minnesota'>Minnesota</option>
+                        <option value='Missouri'>Missouri</option>
+                        <option value='Montana'>Montana</option>
+                        <option value='Nebraska'>Nebraska</option>
+                        <option value='Nevada'>Nevada</option>
+                        <option value='New Mexico'>New Mexico</option>
+                        <option value='North Dakota'>North Dakota</option>
+                        <option value='Oklahoma'>Oklahoma</option>
+                        <option value='Oregon'>Oregon</option>
+                        <option value='South Dakota'>South Dakota</option>
+                        <option value='Texas'>Texas</option>
+                        <option value='Utah'>Utah</option>
+                        <option value='West Virginia'>West Virginia</option>
+                        <option value='Wisconsin'>Wisconsin</option>
+                </select>
+                <b>Selected Demographic:</b>
+                <select id='sex'>
+                        <option value='Age'>Age</option>
+                        <option value='Sex'>Sex</option>
+                    </select>
+            </div>
+        <div id='dashboard'></div>
+        <p></p>
+        
+        <p id='ageintro' class="class1">(Generation Z:7-22, Millennials:23-38, Generation X:39-52, Baby Boomers:53-71, Generation V:72+)</p>
+        <p class="h1"></p>
+        <p class="lead"><a href="index.html">Section I</a></p>
+        <p class="class1" id="citation">Data(unweighted) from <a href="https://www.ntia.doc.gov/page/download-digital-nation-datasets">2015 NTIA Digital Nation Data</a></p>
+    </div>
+
+    <!-- JavaScript modules -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="dashboard2.js"></script>
+    <script>
+            function onFunction(selTag) {
+                var x = selTag.options[selTag.selectedIndex].text;
+                document.getElementById("title").innerHTML = "Section II: Different Locations of Using Internet with Age Distribution in " + x + " State";
+            }
+            </script>
+</body>
+
+</html>
